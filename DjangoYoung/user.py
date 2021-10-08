@@ -70,6 +70,17 @@ def delete(request):
     print(request.body)
     return HttpResponse('success')
 
+def list(request):
+    request.encoding = 'utf-8'
+    list = []
+    users = User.objects.all()
+    for u in users:
+        user = { 'userName': u.user_name, 'password': u.password }
+        print(user)
+        list.append(user)
+    return JsonResponse(list, safe=False)
+    
+
 # 接收请求数据
 # def search(request):  
 #     # 初始化
