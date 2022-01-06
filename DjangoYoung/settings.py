@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'werkzeug_debugger_runserver',
+    'django_extensions',
     'corsheaders',
     'TestModel',
     'Auth',
@@ -60,7 +62,9 @@ ROOT_URLCONF = 'DjangoYoung.urls'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
+  'https://172.16.94.161:3000',
   'http://172.16.94.161:8000',
+  'https://*.*.*.*:*',
   'http://*.*.*.*:*'
 )
 

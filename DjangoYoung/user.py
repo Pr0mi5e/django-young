@@ -10,6 +10,7 @@ def get_uuid():
 def check(userName):
     return len(User.objects.filter(user_name=userName)) == 0
 
+# 管理员登录
 def login(request):
     request.encoding = 'utf-8'
     response = {}
@@ -64,12 +65,13 @@ def update(request):
     # Test.objects.all().update(name='Google')
     return HttpResponse(response_text)
 
-
+# 删除管理员
 def delete(request):
     request.encoding = 'utf-8'
     print(request.body)
     return HttpResponse('success')
 
+# 查询管理员
 def list(request):
     request.encoding = 'utf-8'
     list = []
@@ -81,7 +83,7 @@ def list(request):
     return JsonResponse(list, safe=False)
     
 
-# 接收请求数据
+# demo
 # def search(request):  
 #     # 初始化
 #     list = []
