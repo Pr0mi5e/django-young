@@ -26,4 +26,5 @@ urlpatterns = [
     path('user/login', user.login),
     path('student/save', student.save),
     path('student/list', student.list),
+    path('student/delete', student.delete)
 ]
