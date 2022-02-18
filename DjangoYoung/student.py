@@ -19,7 +19,7 @@ def list(requst):
   list = []
   students = Student.objects.all()
   for stu in students:
-    student = { 'studentName': stu.student_name, 'password': stu.password, 'id': stu.id }
+    student = { 'studentName': stu.student_name, 'password': stu.password, 'id': stu.id, 'comment_flag': stu.comment_flag }
     list.append(student)
     print(stu.student_name)
   return JsonResponse(list, safe=False)
@@ -29,7 +29,7 @@ def save(request):
     request.encoding = 'utf-8'
     response = {}
     if check_by_name(request.POST['studentName']):
-        user = Student(id=get_uuid(), student_name=request.POST['studentName'], password=request.POST['password'])
+        user = Student(id=get_uuid(), student_name=request.POST['studentName'], password=request.POST['password'], comment_flag=request.POST['commentFlag'])
         user.save()
         response['success'] = 1
     else:
