@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$$y$1qgo-uy#e)+#^ephb3-%21tb+t#dx(jvs%hdh!ewuq2^e1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['172.16.94.161', '39.105.22.135']
 
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'werkzeug_debugger_runserver',
+    'django_extensions',
     'corsheaders',
     'Auth',
     'Yongdao'
@@ -59,7 +61,9 @@ ROOT_URLCONF = 'DjangoYoung.urls'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
+  'https://172.16.94.161:3000',
   'http://172.16.94.161:8000',
+  'https://*.*.*.*:*',
   'http://*.*.*.*:*'
 )
 

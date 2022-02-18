@@ -6,35 +6,39 @@ import uuid
 def get_uuid():
     return uuid.uuid4()
 
-# 检查管理员
-def check(studentName):
+# 检查学员名称是否重复
+def check_by_name(studentName):
     return len(Student.objects.filter(student_name=studentName)) == 0
+
+# 检查学员是否存在
+def check_by_id(id):
+    return len(Student.objects.filter(id=id)) == 1
 
 def list(requst):
   requst.encoding = 'utf-8'
   list = []
   students = Student.objects.all()
   for stu in students:
-    student = { 'studentName': stu.student_name, 'password': stu.password }
+    student = { 'studentName': stu.student_name, 'password': stu.password, 'id': stu.id, 'comment_flag': stu.comment_flag }
     list.append(student)
     print(stu.student_name)
   return JsonResponse(list, safe=False)
 
-# 保存管理员
+# 保存
 def save(request):
     request.encoding = 'utf-8'
     response = {}
-    if check(request.POST['studentName']):
-        user = Student(id=get_uuid(), student_name=request.POST['studentName'], password=request.POST['password'])
+    if check_by_name(request.POST['studentName']):
+        user = Student(id=get_uuid(), student_name=request.POST['studentName'], password=request.POST['password'], comment_flag=request.POST['commentFlag'])
         user.save()
         response['success'] = 1
     else:
         response['success'] = 0
-    print(check(request.POST['studentName']))
+    print(check_by_name(request.POST['studentName']))
     response['code'] = 200
     return JsonResponse(response)
 
-# 更新管理员
+# 更新
 def update(request):
     request.encoding = 'utf-8'
     response_text = 'success'
@@ -55,8 +59,15 @@ def update(request):
     # Test.objects.all().update(name='Google')
     return HttpResponse(response_text)
 
-
+# 删除
 def delete(request):
     request.encoding = 'utf-8'
-    print(request.body)
-    return HttpResponse('success')
+    response = {}
+    studentId = request.POST['studentId']
+    if check_by_id(studentId):
+        Student.objects.filter(id=studentId).delete()
+        response['success'] = 1
+    else:
+        response['success'] = 0
+    response['code'] = 200
+    return JsonResponse(response)

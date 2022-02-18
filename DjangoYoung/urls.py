@@ -19,10 +19,12 @@ from . import user, student
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('user/list', user.list),
     path('user/save', user.save),
     path('user/update', user.update),
     path('user/delete', user.delete),
     path('user/login', user.login),
     path('student/save', student.save),
     path('student/list', student.list),
+    path('student/delete', student.delete)
 ]
