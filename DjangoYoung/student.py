@@ -19,7 +19,7 @@ def list(requst):
   list = []
   students = Student.objects.all()
   for stu in students:
-    student = { 'studentName': stu.student_name, 'password': stu.password, 'id': stu.id, 'comment_flag': stu.comment_flag }
+    student = { 'studentName': stu.student_name, 'password': stu.password, 'id': stu.id, 'commentFlag': stu.comment_flag }
     list.append(student)
     print(stu.student_name)
   return JsonResponse(list, safe=False)
